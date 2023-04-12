@@ -1,0 +1,51 @@
+version: "3"
+services:
+  
+  client:
+   build:
+      context: ./client
+      dockerfile: Dockerfile
+   ports:
+    -  5000:5000
+   container_name: week7-client
+   networks:
+    -  week7-stack-net
+   volumes:
+    -  ./client/src:/usr/app/src
+    -  ./client/public:/usr/app/public
+   depends_on:
+    - backend
+   stdin_open: true
+   ttydriver: bridge
+
+volumes:
+  mongo-data:
+    driver: local: true
+
+  backend:
+   build:
+      context: ./backend
+      dockerfile: Dockerfile
+   ports:
+     - 3080:3080
+   container_name: week7-backend
+   networks:
+     - week7-stack-net
+   volumes:
+    - ./backend/src:/usr/app/src
+   depends_on:
+    - db
+
+  db:
+    image: mongo
+    ports:
+      - 27017:27017
+    container_name: mongo-db
+    networks:
+      - week7-stack-net
+    volumes:
+      - mongo-data:/data/db
+
+networks:
+  week7-stack-net:
+    
