@@ -1,5 +1,5 @@
 # Pull the Node image from Docker Hub
-FROM node:13-slim
+FROM node:13-alpine
 
 # Setting Working Directory
 WORKDIR /usr/app
