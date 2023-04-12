@@ -48,4 +48,11 @@ volumes:
 
 networks:
   week7-stack-net:
+   driver: bridge
+
+volumes:
+  mongo-data:
+    driver: local
+
+
     
