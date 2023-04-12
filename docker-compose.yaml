@@ -16,11 +16,6 @@ services:
    depends_on:
     - backend
    stdin_open: true
-   ttydriver: bridge
-
-volumes:
-  mongo-data:
-    driver: local: true
 
   backend:
    build:
@@ -50,9 +45,11 @@ networks:
   week7-stack-net:
    driver: bridge
 
+
 volumes:
   mongo-data:
     driver: local
+
 
 
     
