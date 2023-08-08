@@ -1,19 +1,17 @@
 # Pull the Node image from Docker Hub
-FROM node:13-alpine
+FROM node:13.12.0-alpine
 
 # Setting Working Directory
-WORKDIR /usr/app
+WORKDIR /app
 
 # Copying only package.json
-COPY package*.json ./
+COPY package*.json /app/
 
 # Install Dependencies
 RUN npm install
 
 # Copy rest of the code to container
-COPY . .
-
-EXPOSE 3080
+COPY . /app/
 
 # Run the API on Nodemon
-CMD ["npm", "run"]
+CMD ["npm", "start"]
