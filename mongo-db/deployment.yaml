@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: week9-database-deployment
+spec:
+  selector:
+    matchLabels:
+      app: week9-database
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: week9-database
+    spec:
+      containers:
+        - name: week9-database
+          image: mongo
+          ports:
+            - containerPort: 27017
+          volumeMounts:
+            - name: database-volume
+              mountPath: /data/db
+          env:
+            - name: MONGO_INITDB_ROOT_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: week9-secrets
+                  key: MONGO_INITDB_ROOT_USERNAME
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: week9-secrets
+                  key: MONGO_INITDB_ROOT_PASSWORD
+      volumes:
+        - name: database-volume
+          persistentVolumeClaim:
+            claimName: week9-database-claim
