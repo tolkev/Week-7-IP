@@ -2,9 +2,7 @@ version: "3"
 services:
   
   client:
-   build:
-      context: ./client
-      dockerfile: Dockerfile
+   image: kndungi/yolo-client:1.0.0 
    ports:
     -  3000:3000
    container_name: week7-client
@@ -16,9 +14,7 @@ services:
      PORT: 3000
      
   backend:
-   build:
-      context: ./backend
-      dockerfile: Dockerfile
+   image: kndungi/yolo-backend:1.0.0
    ports:
      - 5000:5000
    container_name: week7-backend
