@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: week9-backend
+spec:
+  selector:
+    matchLabels:
+      app: week9-backend
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: week9-backend
+    spec:
+      containers:
+        - name: week9-backend
+          image: kndungi/yolo-backend:1.0.0
+          ports:
+            - containerPort: 5000
+          env:
+            - name: MONGODB_URI
+              valueFrom:
+                secretKeyRef:
+                  name: week9-backend-secrets
+                  key: MONGODB_URI
