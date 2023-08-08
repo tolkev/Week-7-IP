@@ -8,17 +8,13 @@ services:
    ports:
     -  3000:3000
    container_name: week7-client
-   networks:
-    -  week7-stack-net
    volumes:
     -  ./client:/app
    depends_on:
     - backend
    environment:
      PORT: 3000
-     DATABASE_URL: 'mongodb://admin:admin@mongo:27017/'
-   stdin_open: true
-
+     
   backend:
    build:
       context: ./backend
@@ -26,8 +22,6 @@ services:
    ports:
      - 5000:5000
    container_name: week7-backend
-   networks:
-     - week7-stack-net
    volumes:
     - ./backend:/app
    depends_on:
@@ -43,19 +37,13 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: admin
-    networks:
-      - week7-stack-net
     volumes:
       - mongo-data:/data/db
-
-networks:
-  week7-stack-net:
-   driver: bridge
 
 
 volumes:
   mongo-data:
-    driver: local
+  
 
 
 
