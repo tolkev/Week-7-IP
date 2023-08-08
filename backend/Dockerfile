@@ -1,5 +1,5 @@
 # Pull the Node image from Docker Hub
-FROM node:13.12.0-alpine
+FROM node:18.15.0-alpine
 
 # Setting Working Directory
 WORKDIR /app
@@ -8,7 +8,7 @@ WORKDIR /app
 COPY package*.json /app/
 
 # Install Dependencies
-RUN npm install
+RUN npm i
 
 # Copy rest of the code to container
 COPY . /app/
