@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: week9-client
+spec:
+  selector:
+    matchLabels:
+      app: week9-client
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: week9-client
+    spec:
+      containers:
+        - name: week9-client
+          image: kndungi/yolo-client:1.0.0
+          tty: true
+          ports:
+            - containerPort: 3000
